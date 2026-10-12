@@ -1,6 +1,6 @@
 {
   "city": "TP. Hồ Chí Minh",
-  "version": "sample-0.2",
+  "version": "sample-0.3",
   "note": "DỮ LIỆU MẪU – chưa đối chiếu văn bản pháp luật chính thức. Không dùng để ra quyết định thật.",
   "unverified": "chưa xác minh",
   "vehicles": [
@@ -21,14 +21,23 @@
     "light": {
       "verified": true,
       "allowed": "Xe tải dưới 2,5 tấn được chạy nội đô ngoài giờ cấm.",
-      "restricted": "Cấm 6h–9h và 16h–20h (theo QĐ 23/2018/UBND, nguồn báo chí – chưa đối chiếu bản gốc)."
+      "restricted": "Cấm 06:00–09:00 và 16:00–20:00 hằng ngày (Điều 3).",
+      "notes": []
     },
     "heavy": {
-      "verified": false,
-      "allowed": "Giờ được chạy nội đô: chưa xác minh.",
-      "restricted": "Các nguồn mâu thuẫn (GHN: cấm 6h–22h; Sở GTVT qua báo chí: chỉ chạy 22h–6h trừ hành lang riêng). Đang chờ văn bản gốc."
+      "verified": true,
+      "allowed": "Xe tải từ 2,5 tấn được chạy nội đô từ 22:00 đến 06:00, hoặc trên hành lang riêng theo giờ ở dưới.",
+      "restricted": "Cấm 06:00–22:00 hằng ngày (Điều 3), trừ các hành lang tại Điều 5 / Phụ lục 1.",
+      "notes": [
+        "Không giới hạn giờ: cảng Phúc Long, các cảng trên đường Lưu Trọng Lư, ICD Thủ Đức (đường số 1), đường vào chợ Bình Điền.",
+        "09:00–16:00: Mai Chí Thọ, Trần Xuân Soạn, Phạm Thế Hiển, QL50, đường vào trung tâm đăng kiểm 50.01S, 50.03V, 50.03S.",
+        "09:00–16:00 và 21:00–22:00: Lê Trọng Tấn, KCN Tân Bình, đường số 14 Thủ Đức, hành lang nhà máy sữa, cảng Nhà Rồng, cảng Tân Thuận 2, cảng Lotus.",
+        "08:00–16:00 và 18:00–22:00: cảng Phú Định."
+      ]
     }
   },
+  "zonesExemptions": "Miễn trừ (QĐ 23/2019): xe phục vụ điện, nước sạch, viễn thông, phòng chống thiên tai… được miễn hạn chế; một số xe tải nặng (vật liệu công trình trọng điểm, chất thải nguy hại, nhiên liệu hàng không) được chạy thêm 09:00–16:00 và 20:00–22:00. Sở GTVT có thể điều chỉnh tuyến hằng năm (Điều 13).",
+  "zonesSource": "QĐ 23/2018/QĐ-UBND, sửa đổi bởi QĐ 23/2019/QĐ-UBND – đã xác minh (caselaw.vn).",
   "fines": [
     { "min": 10, "max": 30, "text": "Chở quá tải trọng 10% – 30%", "amount": "800.000 – 1.000.000 đ", "ref": "Đ.21 k.2 điểm a" },
     { "min": 30, "max": 50, "text": "Chở quá tải trọng 30% – 50%", "amount": "3.000.000 – 5.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.5 điểm a" },

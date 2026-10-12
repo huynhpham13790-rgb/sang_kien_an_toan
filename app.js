@@ -22,7 +22,9 @@ function render(rules, r) {
   const risks = [...(r.fine ? [r.fine] : []), ...rules.otherFines];
   $('result').innerHTML = `
     <div class="card"><h2>🛣 Tuyến đường ${r.zone.verified ? '' : tag}</h2>
-      <p class="${r.zone.verified ? 'ok' : ''}">${r.zone.allowed}</p><p>${r.zone.restricted}</p></div>
+      <p class="${r.zone.verified ? 'ok' : ''}">${r.zone.allowed}</p><p>${r.zone.restricted}</p>
+      ${r.zone.notes.length ? `<ul>${r.zone.notes.map((n) => `<li>${n}</li>`).join('')}</ul>` : ''}
+      <p class="src">${rules.zonesExemptions}</p><p class="src">${rules.zonesSource}</p></div>
     <div class="card"><h2>⚖ Tải trọng</h2>${loadLine}</div>
     <div class="card"><h2>🪪 Hạng bằng lái cần có</h2><p>${r.v.class ? `<b>Hạng ${r.v.class}</b>` : tag}</p></div>
     ${r.c.extra ? `<div class="card"><h2>📦 Lưu ý loại hàng</h2><p>${r.c.extra}</p></div>` : ''}
