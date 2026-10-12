@@ -5,43 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Đúng hàng – Đúng phương tiện | Demo TP.HCM</title>
 <style>
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, sans-serif; background: #f4f6f8; color: #1d2733; }
-  .banner { background: #c62828; color: #fff; text-align: center; padding: 8px; font-weight: 600; font-size: 14px; }
-  main { max-width: 560px; margin: 0 auto; padding: 16px; }
-  h1 { font-size: 22px; margin: 8px 0 4px; }
-  .sub { color: #5b6773; margin: 0 0 16px; font-size: 14px; }
-  label { display: block; font-weight: 600; margin: 12px 0 4px; }
-  select, input, button { width: 100%; font-size: 16px; padding: 10px; border: 1px solid #c8d0d8; border-radius: 8px; background: #fff; }
-  button { margin-top: 16px; background: #1565c0; color: #fff; border: 0; font-weight: 600; cursor: pointer; }
-  .card { background: #fff; border-radius: 10px; padding: 14px; margin-top: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-  .card h2 { font-size: 16px; margin: 0 0 6px; }
-  .ok { color: #2e7d32; font-weight: 600; }
-  .warn { color: #c62828; font-weight: 600; }
-  ul { padding-left: 18px; margin: 6px 0; }
-  .tag { background: #fff3e0; color: #e65100; font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 6px; }
-  .src { font-size: 12px; color: #5b6773; margin: 8px 0 0; }
-  footer { font-size: 12px; color: #5b6773; text-align: center; padding: 20px 16px; }
+/* Token theo mockup R2 của @designer: chữ 14 (chú thích, nhãn) / 16 (nội dung) / 20 (tiêu đề thẻ) / 28 (kết luận),
+   vùng chạm tối thiểu 48px, giãn cách 4/8/12/16/24. */
+:root{
+  --primary:#0B5CAD; --danger:#B3261E; --ok:#1B6E3A;
+  --warn-bg:#FFF1CC; --warn-fg:#6B4200; --ok-bg:#DDF2E2; --ok-fg:#14532D; --danger-bg:#FDE7E5; --danger-fg:#8C1C15;
+  --bg:#F3F5F7; --card:#fff; --text:#16202A; --muted:#4A5866; --line:#C9D1D9;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --r-card:12px; --r-ctl:8px; --tap:48px;
+  --fs-s:14px; --fs-m:16px; --fs-l:20px; --fs-xl:28px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);font:var(--fs-m)/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text)}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+[hidden]{display:none!important}
+
+.banner{position:sticky;top:0;z-index:10;background:var(--danger);color:#fff;text-align:center;font-weight:700;font-size:var(--fs-m);min-height:44px;display:flex;align-items:center;justify-content:center;padding:var(--s2) var(--s4);line-height:1.3}
+section{flex:1;display:flex;flex-direction:column}
+main,.bar{width:100%;max-width:560px;margin:0 auto}
+main{flex:1;padding:var(--s4);padding-bottom:var(--s5)}
+h1{font-size:var(--fs-l);line-height:1.25;margin:var(--s2) 0 var(--s1)}
+h1:focus{outline:none}
+.sub{margin:0 0 var(--s4);color:var(--muted)}
+
+/* ---- form ---- */
+.field{margin-top:var(--s4)}
+.field label{display:block;font-weight:700;margin-bottom:var(--s1)}
+.ctl{width:100%;min-height:var(--tap);padding:var(--s2) var(--s3);border:2px solid var(--line);border-radius:var(--r-ctl);background:#fff;text-overflow:ellipsis}
+.ctl:focus{border-color:var(--primary)}
+.unit{position:relative}
+.unit .ctl{padding-right:56px}
+.unit span{position:absolute;right:var(--s3);top:0;bottom:0;display:flex;align-items:center;color:var(--muted);pointer-events:none}
+.field.err .ctl{border-color:var(--danger);background:#fffafa}
+.errmsg{display:none;margin:var(--s1) 0 0;color:var(--danger-fg);font-weight:700;font-size:var(--fs-m)}
+.field.err .errmsg{display:block}
+.hint{margin:var(--s1) 0 0;color:var(--muted);font-size:var(--fs-s)}
+.legend{margin-top:var(--s5);background:var(--card);border-radius:var(--r-card);padding:var(--s4)}
+.legend h2{font-size:var(--fs-m);margin:0 0 var(--s2)}
+.legend p{margin:var(--s2) 0 0;font-size:var(--fs-s);color:var(--muted)}
+
+/* ---- thanh nút dính đáy (vùng ngón cái) ---- */
+.bar{position:sticky;bottom:0;z-index:9;background:linear-gradient(to top,var(--bg) 70%,rgba(243,245,247,0));padding:var(--s4);padding-bottom:calc(var(--s4) + env(safe-area-inset-bottom))}
+.btn{width:100%;min-height:52px;border:0;border-radius:var(--r-ctl);background:var(--primary);color:#fff;font-weight:700;font-size:var(--fs-m);cursor:pointer}
+.btn:disabled{background:#8a97a5;cursor:not-allowed}
+.btn.sec{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+
+/* ---- nhãn xác minh ---- */
+.tag{display:inline-flex;gap:var(--s1);align-items:center;font-size:var(--fs-s);font-weight:700;line-height:1.2;padding:var(--s1) var(--s2);border-radius:6px;text-transform:uppercase;letter-spacing:.02em}
+.tag.yes{background:var(--ok-bg);color:var(--ok-fg)}
+.tag.no{background:var(--warn-bg);color:var(--warn-fg);border:1px solid #E0B24A}
+
+/* ---- kết quả ---- */
+.summary{margin:var(--s2) 0 var(--s4);color:var(--muted);font-size:var(--fs-s);overflow-wrap:anywhere}
+.summary b{color:var(--text)}
+.card{background:var(--card);border-radius:var(--r-card);padding:var(--s4);margin-top:var(--s3);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.card h2{font-size:var(--fs-l);line-height:1.25;margin:0 0 var(--s2);display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.card p{margin:var(--s2) 0 0;overflow-wrap:anywhere}
+.src{font-size:var(--fs-s);color:var(--muted)}
+.bad{color:var(--danger-fg)}
+.good{color:var(--ok-fg)}
+.verdict{border-left:8px solid var(--ok);padding-left:var(--s4)}
+.verdict.warn{border-color:#C77700;background:#fffaf0}
+.verdict.danger{border-color:var(--danger);background:var(--danger-bg)}
+.verdict .big{font-size:var(--fs-xl);line-height:1.15;font-weight:800;margin:0}
+.verdict.danger .big{color:var(--danger-fg)}
+.verdict.ok .big{color:var(--ok-fg)}
+.verdict.warn .big{color:var(--warn-fg)}
+.verdict ul{list-style:none;margin:var(--s3) 0 0;padding:0}
+.verdict li{display:flex;gap:var(--s2);margin-top:var(--s2)}
+.verdict li b{flex:none}
+.timebar{display:block;height:20px;border-radius:6px;border:1px solid var(--line);margin-top:var(--s3)}
+.ticks{display:flex;justify-content:space-between;font-size:var(--fs-s);color:var(--muted);margin-top:var(--s1)}
+.ticks span{width:0;display:flex;justify-content:center;white-space:nowrap}
+.ticks span:first-child{justify-content:flex-start}
+.ticks span:last-child{justify-content:flex-end}
+.loadbar{position:relative;height:16px;border-radius:8px;background:#E6EAEE;margin:var(--s3) 0 var(--s1);overflow:hidden}
+.loadbar i{position:absolute;left:0;top:0;bottom:0;background:var(--ok)}
+.loadbar.over i{background:var(--danger)}
+.loadbar u{position:absolute;top:0;bottom:0;width:3px;background:var(--text)}
+details{border-top:1px solid var(--line)}
+details:first-of-type{margin-top:var(--s3)}
+summary{min-height:var(--tap);display:flex;align-items:center;gap:var(--s2);cursor:pointer;font-weight:700;padding:var(--s2) 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸";flex:none;color:var(--primary)}
+details[open]>summary::before{content:"▾"}
+summary small{margin-left:auto;font-weight:400;color:var(--muted);font-size:var(--fs-s);text-align:right}
+details ul{margin:0 0 var(--s3);padding-left:var(--s5)}
+details li{margin-top:var(--s1);overflow-wrap:anywhere}
+.fine{display:block;margin-top:var(--s3);padding:var(--s3);border-radius:var(--r-ctl);background:var(--bg)}
+.fine b{display:block;font-size:var(--fs-m)}
+.fine span{display:block;font-size:var(--fs-s);color:var(--muted)}
+.notice{background:#fff;border-left:8px solid var(--primary)}
+
+/* ---- tải / lỗi ---- */
+.skel{height:var(--tap);border-radius:var(--r-ctl);background:linear-gradient(90deg,#e3e8ed,#f2f5f7,#e3e8ed);background-size:200% 100%;animation:sh 1.2s linear infinite;margin-top:var(--s2)}
+.skel.s{width:40%;height:20px;margin-top:var(--s4)}
+@keyframes sh{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+.failbox{background:var(--card);border-radius:var(--r-card);padding:var(--s5) var(--s4);text-align:center;margin-top:var(--s4)}
+.failbox h2{font-size:var(--fs-l);margin:var(--s2) 0}
+.failbox p{color:var(--muted);margin:0 0 var(--s4)}
+footer{padding:var(--s4);text-align:center;font-size:var(--fs-s);color:var(--muted)}
 </style>
 </head>
 <body>
-<div class="banner">⚠ DỮ LIỆU MẪU – chưa đối chiếu văn bản chính thức. Chỉ để minh họa.</div>
-<main>
-  <h1>Đúng hàng – Đúng phương tiện</h1>
-  <p class="sub">Kiểm tra nhanh tuyến đường, tải trọng, hạng bằng lái và mức phạt cho xe chở hàng tại TP.HCM.</p>
+<div class="banner" role="note">⚠ DỮ LIỆU MẪU – chỉ để minh họa</div>
 
-  <form id="form">
-    <label for="vehicle">Loại xe</label>
-    <select id="vehicle" required></select>
-    <label for="cargo">Loại hàng</label>
-    <select id="cargo" required></select>
-    <label for="load">Khối lượng hàng (tấn)</label>
-    <input id="load" type="text" inputmode="decimal" required placeholder="vd. 3,5">
-    <button type="submit">Kiểm tra</button>
-  </form>
+<!-- Màn 1: nhập -->
+<section id="viewForm" aria-labelledby="t1">
+  <main>
+    <h1 id="t1">Đúng hàng – Đúng phương tiện</h1>
+    <p class="sub">Xe tải chở hàng tại TP.HCM: giờ và tuyến được chạy, tải trọng, mức phạt.</p>
 
-  <div id="result"></div>
-</main>
+    <div id="loadingBox" aria-busy="true" aria-live="polite">
+      <div class="skel s"></div><div class="skel"></div>
+      <div class="skel s"></div><div class="skel"></div>
+      <div class="skel s"></div><div class="skel"></div>
+      <p class="src" style="text-align:center">Đang tải dữ liệu luật…</p>
+    </div>
+
+    <div id="failBox" class="failbox" role="alert" hidden>
+      <div aria-hidden="true" style="font-size:40px">📡</div>
+      <h2>Không tải được dữ liệu luật</h2>
+      <p>Kiểm tra mạng rồi bấm thử lại. Dữ liệu cần tải mỗi lần mở trang.</p>
+      <button class="btn" id="retry" type="button">Thử lại</button>
+    </div>
+
+    <form id="form" novalidate hidden>
+      <div class="field">
+        <label for="vehicle">Loại xe</label>
+        <select class="ctl" id="vehicle"></select>
+      </div>
+      <div class="field">
+        <label for="cargo">Loại hàng</label>
+        <select class="ctl" id="cargo"></select>
+      </div>
+      <div class="field" id="loadField">
+        <label for="load">Khối lượng hàng</label>
+        <div class="unit">
+          <input class="ctl" id="load" type="text" inputmode="decimal" autocomplete="off" placeholder="vd. 3,5" aria-describedby="loadHint loadErr">
+          <span aria-hidden="true">tấn</span>
+        </div>
+        <p class="hint" id="loadHint">Gõ 3,5 hoặc 3.5 đều được. Đơn vị là tấn, không phải kg.</p>
+        <p class="errmsg" id="loadErr" role="alert"></p>
+      </div>
+
+      <div class="legend">
+        <h2>Cách đọc các nhãn</h2>
+        <p><span class="tag yes">✓ Đã xác minh</span> Đã đối chiếu văn bản gốc, có ghi nguồn.</p>
+        <p><span class="tag no">⚠ Chưa xác minh</span> Chưa đối chiếu. Đừng dùng để quyết định thật.</p>
+      </div>
+    </form>
+  </main>
+  <div class="bar"><button class="btn" id="submit" type="submit" form="form" disabled>Đang tải dữ liệu…</button></div>
+</section>
+
+<!-- Màn 2: kết quả -->
+<section id="viewResult" hidden aria-labelledby="t2">
+  <main>
+    <h1 id="t2" tabindex="-1">Kết quả kiểm tra</h1>
+    <p class="summary" id="summary"></p>
+    <div id="cards"></div>
+  </main>
+  <div class="bar"><button class="btn sec" id="back" type="button">← Sửa thông tin</button></div>
+</section>
+
 <footer>Bản demo dự thi Sáng kiến ATGT 2026 · <span id="ver"></span></footer>
 <script src="app.js"></script>
 </body>

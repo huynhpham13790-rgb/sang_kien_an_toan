@@ -1,14 +1,14 @@
 {
   "city": "TP. Hồ Chí Minh",
-  "version": "sample-0.3",
+  "version": "sample-0.4",
   "note": "DỮ LIỆU MẪU – chưa đối chiếu văn bản pháp luật chính thức. Không dùng để ra quyết định thật.",
   "unverified": "chưa xác minh",
   "vehicles": [
-    { "id": "van", "name": "Xe tải van / bán tải (≤ 950 kg)", "class": null, "maxLoadT": 0.95, "zone": "light" },
-    { "id": "truck_light", "name": "Xe tải nhẹ (dưới 2,5 tấn)", "class": null, "maxLoadT": 2.49, "zone": "light" },
-    { "id": "truck_medium", "name": "Xe tải trung (2,5 – 7,5 tấn)", "class": null, "maxLoadT": 7.5, "zone": "heavy" },
-    { "id": "truck_heavy", "name": "Xe tải nặng (> 7,5 tấn)", "class": null, "maxLoadT": 15, "zone": "heavy" },
-    { "id": "container", "name": "Xe đầu kéo / container", "class": null, "maxLoadT": 30, "zone": "heavy" }
+    { "id": "van", "name": "Xe tải van / bán tải (≤ 950 kg)", "class": null, "maxLoadT": 0.95, "maxLoadTVerified": false, "zone": "light" },
+    { "id": "truck_light", "name": "Xe tải nhẹ (dưới 2,5 tấn)", "class": null, "maxLoadT": 2.49, "maxLoadTVerified": false, "zone": "light" },
+    { "id": "truck_medium", "name": "Xe tải trung (2,5 – 7,5 tấn)", "class": null, "maxLoadT": 7.5, "maxLoadTVerified": false, "zone": "heavy" },
+    { "id": "truck_heavy", "name": "Xe tải nặng (> 7,5 tấn)", "class": null, "maxLoadT": 15, "maxLoadTVerified": false, "zone": "heavy" },
+    { "id": "container", "name": "Xe đầu kéo / container", "class": null, "maxLoadT": 30, "maxLoadTVerified": false, "zone": "heavy" }
   ],
   "cargo": [
     { "id": "general", "name": "Hàng thông thường", "extra": null },
@@ -20,33 +20,36 @@
   "zones": {
     "light": {
       "verified": true,
-      "allowed": "Xe tải dưới 2,5 tấn được chạy nội đô ngoài giờ cấm.",
+      "ban": [[6, 9], [16, 20]],
+      "allowed": "Ngoài giờ cấm, xe dưới 2,5 tấn được chạy nội đô.",
       "restricted": "Cấm 06:00–09:00 và 16:00–20:00 hằng ngày (Điều 3).",
-      "notes": []
+      "corridors": []
     },
     "heavy": {
       "verified": true,
-      "allowed": "Xe tải từ 2,5 tấn được chạy nội đô từ 22:00 đến 06:00, hoặc trên hành lang riêng theo giờ ở dưới.",
-      "restricted": "Cấm 06:00–22:00 hằng ngày (Điều 3), trừ các hành lang tại Điều 5 / Phụ lục 1.",
-      "notes": [
-        "Không giới hạn giờ: cảng Phúc Long, các cảng trên đường Lưu Trọng Lư, ICD Thủ Đức (đường số 1), đường vào chợ Bình Điền.",
-        "09:00–16:00: Mai Chí Thọ, Trần Xuân Soạn, Phạm Thế Hiển, QL50, đường vào trung tâm đăng kiểm 50.01S, 50.03V, 50.03S.",
-        "09:00–16:00 và 21:00–22:00: Lê Trọng Tấn, KCN Tân Bình, đường số 14 Thủ Đức, hành lang nhà máy sữa, cảng Nhà Rồng, cảng Tân Thuận 2, cảng Lotus.",
-        "08:00–16:00 và 18:00–22:00: cảng Phú Định."
+      "ban": [[6, 22]],
+      "allowed": "Được chạy nội đô 22:00–06:00, hoặc trên hành lang riêng theo giờ.",
+      "restricted": "Cấm 06:00–22:00 hằng ngày (Điều 3), trừ các hành lang tại Điều 5.",
+      "corridors": [
+        { "hours": "Không giới hạn giờ", "places": ["cảng Phúc Long", "các cảng trên đường Lưu Trọng Lư", "ICD Thủ Đức (đường số 1)", "đường vào chợ Bình Điền"] },
+        { "hours": "09:00–16:00", "places": ["Mai Chí Thọ", "Trần Xuân Soạn", "Phạm Thế Hiển", "QL50", "đường vào trung tâm đăng kiểm 50.01S, 50.03V, 50.03S"] },
+        { "hours": "09:00–16:00 và 21:00–22:00", "places": ["Lê Trọng Tấn", "KCN Tân Bình", "đường số 14 Thủ Đức", "hành lang nhà máy sữa", "cảng Nhà Rồng", "cảng Tân Thuận 2", "cảng Lotus"] },
+        { "hours": "08:00–16:00 và 18:00–22:00", "places": ["cảng Phú Định"] }
       ]
     }
   },
-  "zonesExemptions": "Miễn trừ (QĐ 23/2019): xe phục vụ điện, nước sạch, viễn thông, phòng chống thiên tai… được miễn hạn chế; một số xe tải nặng (vật liệu công trình trọng điểm, chất thải nguy hại, nhiên liệu hàng không) được chạy thêm 09:00–16:00 và 20:00–22:00. Sở GTVT có thể điều chỉnh tuyến hằng năm (Điều 13).",
-  "zonesSource": "QĐ 23/2018/QĐ-UBND, sửa đổi bởi QĐ 23/2019/QĐ-UBND – đã xác minh (caselaw.vn).",
+  "zonesExemptions": "Miễn trừ (QĐ 23/2019): xe phục vụ điện, nước sạch, viễn thông, phòng chống thiên tai… được miễn hạn chế. Một số xe tải nặng (vật liệu công trình trọng điểm, chất thải nguy hại, nhiên liệu hàng không) được chạy thêm 09:00–16:00 và 20:00–22:00. Sở GTVT có thể điều chỉnh tuyến hằng năm (Điều 13).",
+  "zonesSource": "QĐ 23/2018/QĐ-UBND, sửa đổi bởi QĐ 23/2019/QĐ-UBND – caselaw.vn",
+  "noFineBelow": "Dưới 10%: dữ liệu mẫu chưa có mức phạt",
   "fines": [
-    { "min": 10, "max": 30, "text": "Chở quá tải trọng 10% – 30%", "amount": "800.000 – 1.000.000 đ", "ref": "Đ.21 k.2 điểm a" },
-    { "min": 30, "max": 50, "text": "Chở quá tải trọng 30% – 50%", "amount": "3.000.000 – 5.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.5 điểm a" },
-    { "min": 50, "max": 100, "text": "Chở quá tải trọng 50% – 100%", "amount": "5.000.000 – 7.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.6 điểm a" },
-    { "min": 100, "max": 150, "text": "Chở quá tải trọng 100% – 150%", "amount": "7.000.000 – 8.000.000 đ, trừ 4 điểm GPLX", "ref": "Đ.21 k.7 điểm a" },
-    { "min": 150, "max": null, "text": "Chở quá tải trọng trên 150%", "amount": "8.000.000 – 12.000.000 đ, trừ 10 điểm GPLX", "ref": "Đ.21 k.8 điểm a" }
+    { "min": 10, "max": 30, "text": "Quá tải 10% – 30%", "amount": "800.000 – 1.000.000 đ", "ref": "Đ.21 k.2 điểm a" },
+    { "min": 30, "max": 50, "text": "Quá tải 30% – 50%", "amount": "3.000.000 – 5.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.5 điểm a" },
+    { "min": 50, "max": 100, "text": "Quá tải 50% – 100%", "amount": "5.000.000 – 7.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.6 điểm a" },
+    { "min": 100, "max": 150, "text": "Quá tải 100% – 150%", "amount": "7.000.000 – 8.000.000 đ, trừ 4 điểm GPLX", "ref": "Đ.21 k.7 điểm a" },
+    { "min": 150, "max": null, "text": "Quá tải trên 150%", "amount": "8.000.000 – 12.000.000 đ, trừ 10 điểm GPLX", "ref": "Đ.21 k.8 điểm a" }
   ],
-  "finesSource": "NĐ 168/2024, mức phạt người lái xe tải (bản sao hoatieu.vn) – cần đối chiếu bản chính thức. Phạt chủ xe (Đ.32) và quá tải trọng cầu đường (Đ.34) là quy định khác, chưa tính.",
+  "finesSource": "NĐ 168/2024 (bản sao hoatieu.vn), cần đối chiếu bản chính thức. Phạt chủ xe (Đ.32) và quá tải trọng cầu đường (Đ.34) chưa tính.",
   "otherFines": [
-    { "text": "Xe tải đi vào đường/khung giờ cấm", "amount": "chưa xác minh" }
+    { "text": "Xe đi vào đường hoặc khung giờ cấm", "amount": "chưa xác minh" }
   ]
 }
