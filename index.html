@@ -10,7 +10,7 @@
 :root{
   --primary:#0B5CAD; --danger:#B3261E; --ok:#1B6E3A;
   --warn-bg:#FFF1CC; --warn-fg:#6B4200; --ok-bg:#DDF2E2; --ok-fg:#14532D; --danger-bg:#FDE7E5; --danger-fg:#8C1C15;
-  --bg:#F3F5F7; --card:#fff; --text:#16202A; --muted:#4A5866; --line:#C9D1D9;
+  --bg:#F3F5F7; --card:#fff; --text:#16202A; --muted:#4A5866; --line:#C9D1D9; --ctl-border:#7A8896;
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
   --r-card:12px; --r-ctl:8px; --tap:48px;
   --fs-s:14px; --fs-m:16px; --fs-l:20px; --fs-xl:28px;
@@ -33,7 +33,7 @@ h1:focus{outline:none}
 /* ---- form ---- */
 .field{margin-top:var(--s4)}
 .field label{display:block;font-weight:700;margin-bottom:var(--s1)}
-.ctl{width:100%;min-height:var(--tap);padding:var(--s2) var(--s3);border:2px solid var(--line);border-radius:var(--r-ctl);background:#fff;text-overflow:ellipsis}
+.ctl{width:100%;min-height:var(--tap);padding:var(--s2) var(--s3);border:2px solid var(--ctl-border);border-radius:var(--r-ctl);background:#fff;text-overflow:ellipsis}
 .ctl:focus{border-color:var(--primary)}
 .unit{position:relative}
 .unit .ctl{padding-right:56px}
