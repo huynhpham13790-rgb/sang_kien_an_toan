@@ -99,7 +99,7 @@ function renderResult(rules, r) {
   </article>
 
   <article class="card">
-    <h2>🪪 Hạng bằng lái ${TAG_NO}</h2>
+    <h2>📋 Hạng bằng lái ${TAG_NO}</h2>
     <p>${r.v.class ? `<b>Hạng ${esc(r.v.class)}</b>` : 'Chưa có dữ liệu. Chưa xác minh nên chưa hiển thị hạng.'}</p>
   </article>`;
   $('summary').innerHTML = `<b>${esc(r.v.name)}</b> · ${esc(r.c.name)} · <b>${vn(r.load)} t</b>`;
