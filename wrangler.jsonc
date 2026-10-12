@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sang-kien-an-toan",
+  "compatibility_date": "2026-10-01",
+  // Trang tĩnh: phục vụ thẳng các file trong thư mục gốc repo.
+  "assets": { "directory": "." }
+}
