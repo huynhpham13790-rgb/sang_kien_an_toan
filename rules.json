@@ -1,0 +1,43 @@
+{
+  "city": "TP. Hồ Chí Minh",
+  "version": "sample-0.2",
+  "note": "DỮ LIỆU MẪU – chưa đối chiếu văn bản pháp luật chính thức. Không dùng để ra quyết định thật.",
+  "unverified": "chưa xác minh",
+  "vehicles": [
+    { "id": "van", "name": "Xe tải van / bán tải (≤ 950 kg)", "class": null, "maxLoadT": 0.95, "zone": "light" },
+    { "id": "truck_light", "name": "Xe tải nhẹ (dưới 2,5 tấn)", "class": null, "maxLoadT": 2.49, "zone": "light" },
+    { "id": "truck_medium", "name": "Xe tải trung (2,5 – 7,5 tấn)", "class": null, "maxLoadT": 7.5, "zone": "heavy" },
+    { "id": "truck_heavy", "name": "Xe tải nặng (> 7,5 tấn)", "class": null, "maxLoadT": 15, "zone": "heavy" },
+    { "id": "container", "name": "Xe đầu kéo / container", "class": null, "maxLoadT": 30, "zone": "heavy" }
+  ],
+  "cargo": [
+    { "id": "general", "name": "Hàng thông thường", "extra": null },
+    { "id": "construction", "name": "Vật liệu xây dựng (cát, đá, xi măng)", "extra": "Phải có bạt che kín thùng, không để rơi vãi." },
+    { "id": "oversize", "name": "Hàng quá khổ / quá tải", "extra": "Cần giấy phép lưu hành xe quá khổ, quá tải trước khi chạy." },
+    { "id": "dangerous", "name": "Hàng nguy hiểm (xăng dầu, gas, hóa chất)", "extra": "Cần giấy phép vận chuyển hàng nguy hiểm và biểu trưng nguy hiểm trên xe." },
+    { "id": "food", "name": "Thực phẩm tươi sống", "extra": null }
+  ],
+  "zones": {
+    "light": {
+      "verified": true,
+      "allowed": "Xe tải dưới 2,5 tấn được chạy nội đô ngoài giờ cấm.",
+      "restricted": "Cấm 6h–9h và 16h–20h (theo QĐ 23/2018/UBND, nguồn báo chí – chưa đối chiếu bản gốc)."
+    },
+    "heavy": {
+      "verified": false,
+      "allowed": "Giờ được chạy nội đô: chưa xác minh.",
+      "restricted": "Các nguồn mâu thuẫn (GHN: cấm 6h–22h; Sở GTVT qua báo chí: chỉ chạy 22h–6h trừ hành lang riêng). Đang chờ văn bản gốc."
+    }
+  },
+  "fines": [
+    { "min": 10, "max": 30, "text": "Chở quá tải trọng 10% – 30%", "amount": "800.000 – 1.000.000 đ", "ref": "Đ.21 k.2 điểm a" },
+    { "min": 30, "max": 50, "text": "Chở quá tải trọng 30% – 50%", "amount": "3.000.000 – 5.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.5 điểm a" },
+    { "min": 50, "max": 100, "text": "Chở quá tải trọng 50% – 100%", "amount": "5.000.000 – 7.000.000 đ, trừ 2 điểm GPLX", "ref": "Đ.21 k.6 điểm a" },
+    { "min": 100, "max": 150, "text": "Chở quá tải trọng 100% – 150%", "amount": "7.000.000 – 8.000.000 đ, trừ 4 điểm GPLX", "ref": "Đ.21 k.7 điểm a" },
+    { "min": 150, "max": null, "text": "Chở quá tải trọng trên 150%", "amount": "8.000.000 – 12.000.000 đ, trừ 10 điểm GPLX", "ref": "Đ.21 k.8 điểm a" }
+  ],
+  "finesSource": "NĐ 168/2024, mức phạt người lái xe tải (bản sao hoatieu.vn) – cần đối chiếu bản chính thức. Phạt chủ xe (Đ.32) và quá tải trọng cầu đường (Đ.34) là quy định khác, chưa tính.",
+  "otherFines": [
+    { "text": "Xe tải đi vào đường/khung giờ cấm", "amount": "chưa xác minh" }
+  ]
+}
